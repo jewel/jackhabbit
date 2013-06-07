@@ -42,3 +42,7 @@ gem 'jquery-rails'
 gem 'rails_admin'
 gem 'devise'
 gem 'haml-rails'
+
+group :production do
+  gem 'mysql2'
+end
