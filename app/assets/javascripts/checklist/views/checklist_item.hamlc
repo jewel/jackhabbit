@@ -1,0 +1,4 @@
+.item
+  %label
+    %input(type="checkbox" checked=@item.checked)
+    = @item.label

@@ -18,6 +18,8 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier'
+  gem 'spine-rails'
+  gem 'haml_coffee_assets'
 end
 
 gem 'jquery-rails'
