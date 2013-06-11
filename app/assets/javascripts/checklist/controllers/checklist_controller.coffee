@@ -12,4 +12,11 @@ class App.ChecklistController extends Spine.Controller
     @append view.el
 
   add_all: =>
-    App.ChecklistItem.each @add_one
+    items = App.ChecklistItem.all().sort (a,b) ->
+      if a.position > b.position
+        return 1
+      if a.position < b.position
+        return -1
+      return 0
+
+    items.forEach @add_one
