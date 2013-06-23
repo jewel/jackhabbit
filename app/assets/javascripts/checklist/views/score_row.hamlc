@@ -1,0 +1,3 @@
+%tr
+  %th= @user.email
+  %td= @user.score

@@ -17,5 +17,8 @@ class @App extends Spine.Controller
     @checklist = new App.ChecklistController
       el: '#checklist'
 
+    @scores = new App.ScoresController
+      el: '#scores'
+
 $ ->
   window.app = new App()
