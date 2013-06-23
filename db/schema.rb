@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606011820) do
+ActiveRecord::Schema.define(:version => 20130611045812) do
 
   create_table "accomplishments", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130606011820) do
     t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "period"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

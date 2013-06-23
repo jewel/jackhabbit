@@ -8,7 +8,6 @@ contest between two people.
 TODO
 ----
 
-* Sort list by order
 * Handle weekly items
 * View and edit history
 * Total all points

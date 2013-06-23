@@ -1,3 +1,13 @@
-%h3 #{@user.email}'s Habbits for #{@date == Date.today ? 'Today' : @date}
+%h3
+  #{@user.email}'s Habbits for #{@date == Date.today ? 'Today' : @date}
+  %a(href="/?date=#{@prev}")
+    &lt;
+  - if @next
+    %a(href="/?date=#{@next}")
+      &gt;
 #checklist
   .habits
+#checklist-nav
+
+:javascript
+  date_offset = #{@date_diff}

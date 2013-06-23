@@ -3,17 +3,16 @@ class ChecklistItemsController < ApplicationController
   def index
     accomplishments = {}
 
-    Accomplishment.where(
-      user_id: current_user.id,
-      datetime: today_range
-    ).each do |acc|
-      accomplishments[acc.habit_id] = true
-    end
-
     @items = Habit.all.map do |habit|
       item = habit.attributes.dup
 
-      item[:checked] = !!accomplishments[habit.id]
+      acc = Accomplishment.where(
+        user_id: current_user.id,
+        datetime: habit.period_range,
+        habit_id: habit.id
+      ).count
+
+      item[:checked] = acc != 0
 
       item
     end
@@ -27,7 +26,7 @@ class ChecklistItemsController < ApplicationController
 
     accomplishments = Accomplishment.where(
       user_id: current_user.id,
-      datetime: today_range,
+      datetime: habit.period_range,
       habit_id: habit.id
     )
 
