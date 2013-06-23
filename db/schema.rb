@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611045812) do
+ActiveRecord::Schema.define(:version => 20130623060741) do
 
   create_table "accomplishments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "habit_id"
-    t.datetime "datetime"
+    t.integer "user_id"
+    t.integer "habit_id"
+    t.date    "date"
   end
 
   create_table "habits", :force => true do |t|
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130611045812) do
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 8
+    t.integer  "year",       :limit => 5
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end

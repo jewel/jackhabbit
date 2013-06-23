@@ -5,16 +5,6 @@ class Habit < ActiveRecord::Base
   validates_presence_of :points
   validates_presence_of :period
 
-  def period_range date=Date.today
-    if period == :weekly
-      start = date.beginning_of_week(:sunday).midnight()
-      (start)..(start + 8.days)
-    else
-      start = date.midnight()
-      start..(start + 2.days)
-    end
-  end
-
   def period_enum
     %w{daily weekly}
   end
@@ -26,5 +16,15 @@ class Habit < ActiveRecord::Base
 
   def period
     read_attribute(:period).andand.to_sym
+  end
+
+  def period_range date
+    if period == :weekly
+      start = date.beginning_of_week(:sunday)
+      (start)..(start + 6.days)
+    else
+      start = date
+      start..start
+    end
   end
 end

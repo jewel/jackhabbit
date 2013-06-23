@@ -2,18 +2,17 @@ class ChecklistItemsController < ApplicationController
   # GET /checklist_items
   def index
     accomplishments = {}
+    date = Date.today
+    if params[:date]
+      date = Time.at( params[:date].to_i ).to_date
+    end
+
+    user = current_user
 
     @items = Habit.all.map do |habit|
       item = habit.attributes.dup
-
-      acc = Accomplishment.where(
-        user_id: current_user.id,
-        datetime: habit.period_range,
-        habit_id: habit.id
-      ).count
-
-      item[:checked] = acc != 0
-
+      item[:checked] = user.accomplished? habit, date
+      item[:date] = date
       item
     end
 
@@ -24,22 +23,10 @@ class ChecklistItemsController < ApplicationController
   def update
     habit = Habit.find params[:id]
 
-    accomplishments = Accomplishment.where(
-      user_id: current_user.id,
-      datetime: habit.period_range,
-      habit_id: habit.id
-    )
+    date = Date.parse(params[:date])
 
-    if params[:checked]
-      return head :no_content if accomplishments.count > 0
-      acc = Accomplishment.new
-      acc.user = current_user
-      acc.habit = habit
-      acc.datetime = Time.new
-      acc.save!
-    else
-      accomplishments.map &:delete
-    end
+    action = params[:checked] ? :accomplish! : :unaccomplish!
+    current_user.send(action, habit, date)
 
     head :no_content
   end
