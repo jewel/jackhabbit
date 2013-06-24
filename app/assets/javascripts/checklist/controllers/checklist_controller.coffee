@@ -36,7 +36,6 @@ class App.ChecklistController extends Spine.Controller
 
   navigate: (offset) =>
     @date.setDate( @date.getDate() + offset )
-    @el.empty()
     App.ChecklistItem.fetch
       data: "date=#{Math.round(@date.getTime() / 1000)}"
       cache: false
