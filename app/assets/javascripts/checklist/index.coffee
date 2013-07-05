@@ -21,4 +21,5 @@ class @App extends Spine.Controller
       el: '#scores'
 
 $ ->
+  return unless $('#checklist').length
   window.app = new App()
