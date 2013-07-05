@@ -40,7 +40,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'rails_admin'
-gem 'devise'
+gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'haml-rails'
 
 group :production do

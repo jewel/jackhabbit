@@ -1,6 +1,4 @@
 class Habit < ActiveRecord::Base
-  attr_accessible :label, :points, :period, :position
-
   validates_presence_of :label
   validates_presence_of :points
   validates_presence_of :period
