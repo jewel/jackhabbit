@@ -3,7 +3,7 @@ class App.ScoresController extends Spine.Controller
     super
     App.User.bind "refresh", @render
     App.User.fetch()
-    App.ChecklistItem.bind "update", ->
+    App.ChecklistItem.bind "change", ->
       App.User.fetch()
 
   add_one: (user) =>
