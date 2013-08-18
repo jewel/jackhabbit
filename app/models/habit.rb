@@ -25,4 +25,12 @@ class Habit < ActiveRecord::Base
       start..start
     end
   end
+
+  def period_days
+    if period == :weekly
+      7.days
+    else
+      1.day
+    end
+  end
 end

@@ -13,6 +13,13 @@ class ChecklistItemsController < ApplicationController
       item = habit.attributes.dup
       item[:checked] = user.accomplished? habit, date
       item[:date] = date
+      item[:chain] = 0
+      prev_date = date - habit.period_days
+      while user.accomplished? habit, prev_date
+        item[:chain] += 1
+        prev_date -= habit.period_days
+      end
+
       item
     end
 
