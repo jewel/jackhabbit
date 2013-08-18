@@ -3,4 +3,4 @@
     %input(type="checkbox" checked=@item.checked)
     = @item.label
   - if @item.chain > 0
-    = " (chain of #{@item.chain})"
+    %em= " (chain of #{@item.chain})"
