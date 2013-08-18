@@ -24,6 +24,16 @@ class User < ActiveRecord::Base
     accomplishments_for(habit, date).count > 0
   end
 
+  def chain_length habit, date
+    prev_date = date - habit.period_days
+    len = 0
+    while accomplished? habit, prev_date
+      len += 1
+      prev_date -= habit.period_days
+    end
+    len
+  end
+
   private
   def accomplishments_for habit, date
     accomplishments.where(

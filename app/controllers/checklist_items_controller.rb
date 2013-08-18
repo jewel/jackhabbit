@@ -9,16 +9,28 @@ class ChecklistItemsController < ApplicationController
 
     user = current_user
 
+    other_users = User.all - [current_user]
+
     @items = Habit.all.map do |habit|
       item = habit.attributes.dup
       item[:checked] = user.accomplished? habit, date
       item[:date] = date
-      item[:chain] = 0
-      prev_date = date - habit.period_days
-      while user.accomplished? habit, prev_date
-        item[:chain] += 1
-        prev_date -= habit.period_days
-      end
+      item[:chain] = user.chain_length habit, date
+
+      item[:others] = other_users.map do |o|
+        acc = o.accomplished? habit, date
+        len = o.chain_length habit, date
+        char = o.email[0].downcase
+        char = char.upcase if acc
+
+        if len > 0
+          "#{char}#{len}"
+        elsif acc
+          "#{char}"
+        else
+          ""
+        end
+      end.join ""
 
       item
     end

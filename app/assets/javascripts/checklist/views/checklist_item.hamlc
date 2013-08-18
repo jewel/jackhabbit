@@ -4,3 +4,5 @@
     = @item.label
   - if @item.chain > 0
     %em= " (chain of #{@item.chain})"
+  - if @item.others
+    %small= " [#{@item.others}]"
