@@ -7,7 +7,7 @@ class App.ChecklistItemController extends Spine.Controller
 
   constructor: ->
     super
-    @item.bind "update", @render
+    @item.bind 'ajaxSuccess', @render
 
   render: =>
     html = JST["checklist/views/checklist_item"]
@@ -18,4 +18,5 @@ class App.ChecklistItemController extends Spine.Controller
   toggle: =>
     @item.checked = @checkbox.is(':checked')
     @item.save()
+    @el.addClass 'saving'
     false
