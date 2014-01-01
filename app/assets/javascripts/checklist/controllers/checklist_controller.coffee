@@ -36,6 +36,7 @@ class App.ChecklistController extends Spine.Controller
 
   navigate: (offset) =>
     @date.setDate( @date.getDate() + offset )
+    App.ChecklistItem.trigger 'change:date', @date
     App.ChecklistItem.fetch
       data: "date=#{Math.round(@date.getTime() / 1000)}"
       cache: false
