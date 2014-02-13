@@ -13,7 +13,7 @@ class App.ScoresController extends Spine.Controller
       user.score
 
     scores = scores.sort (a,b) -> a - b
-    median = scores[scores.length/2] || 0
+    median = scores[Math.floor(scores.length/2)] || 0
 
     App.User.all().forEach (user) =>
       html = JST['checklist/views/score_row']
