@@ -1,3 +1,4 @@
 %tr
   %th= @user.email
-  %td= @user.score
+  - diff = @user.score - @median
+  %th= diff

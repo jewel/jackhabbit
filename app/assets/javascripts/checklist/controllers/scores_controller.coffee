@@ -6,16 +6,21 @@ class App.ScoresController extends Spine.Controller
     App.ChecklistItem.bind "change:date", @update
     @update(new Date())
 
-  add_one: (user) =>
-    html = JST['checklist/views/score_row']
-      user: user
-
-    @append html
-
   render: =>
     @el.empty()
 
-    App.User.all().forEach @add_one
+    scores = App.User.all().map (user) ->
+      user.score
+
+    scores = scores.sort (a,b) -> a - b
+    median = scores[scores.length/2] || 0
+
+    App.User.all().forEach (user) =>
+      html = JST['checklist/views/score_row']
+        user: user
+        median: median
+
+      @append html
 
   update: (date) =>
     App.User.fetch
